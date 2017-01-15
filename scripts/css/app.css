@@ -1,0 +1,70 @@
+
+
+
+.navBardemoBasicUsage md-content .firstTab {
+    padding: 50px;
+    margin: 20px;
+    background-color: #fff; }
+#updateAlertTab{
+
+}
+#createTagsTab{
+    background-color: red;
+}
+.md-primary{
+    display: block;
+}
+.radioOptions{
+    display: inline;
+}
+table, th, td {
+    border: 1px solid rgb(230,230,230);
+
+}
+
+.md-table {
+    min-width: 100%;
+    border-collapse: collapse;
+}
+
+.md-table tbody tr:hover, .md-table tbody tr:focus {
+    cursor:pointer;
+    background-color:rgba(63,81,181,0.2);
+}
+
+.md-table-header {
+    border-bottom: 1px solid rgb(230,230,230);
+    color: rgb(130,130,130);
+    text-align: center;
+    font-size: 0.75em;
+    font-weight: 700;
+    padding: 16px 16px 16px 0;
+}
+
+.md-table-cell {
+    border-bottom: 1px solid rgb(230,230,230);
+    color: rgb(130,130,130);
+    text-align: center;
+    font-size: 0.85em;
+    font-weight: 800;
+    padding: 16px 16px 16px 0;
+}
+
+md-toast.error .md-toast-content {
+    background: #f44336;
+    color: white;
+}
+md-toast.success .md-toast-content {
+    background: #4caf50;
+    color: white;
+}
+
+
+.warningStyle{
+    color:red;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: .1px;
+    font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 10px;
+
+}

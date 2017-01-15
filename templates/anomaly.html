@@ -1,0 +1,101 @@
+<md-content layout-padding>
+
+    <div class="column">
+
+        <div >
+
+                <h5>Alert : {{ alert.name }}</h5>
+
+            </div>
+
+            <div>
+                <h5>DataSource : {{ alert.dataSource }}</h5>
+            </div>
+
+
+            <div>
+                <h5>Data SubSource : {{ alert.dataSubSource }}</h5>
+            </div>
+
+            <div>
+                <h5>Metric : {{ alert.metric }}</h5>
+            </div>
+
+            <div>
+                <h5>Filters : </h5>
+            </div>
+            <div ng-repeat="(key, value) in alert.dimensions">
+                <span><h5>{{key }}: {{value}}</h5></span>
+            </div>
+
+            <div>
+                <h5>Aggregation : {{ alert.aggregation }}</h5>
+            </div>
+
+            <div>
+                <h5>Granularity : {{ alert.interval }}</h5>
+            </div>
+
+             <div>
+                <h5>Interval : {{ alert.quickTime }}</h5>
+            </div>
+
+            <div>
+                <h5>Model : {{ alert.model.name }} Threshold: {{ alert.model.params.threshold }}</h5>
+            </div>
+
+            <div>
+                <h5>Cron : {{ alert.cron }}</h5>
+            </div>
+
+            <div>
+                <h5>Emails : {{ alert.emails }}</h5>
+            </div>
+
+    </div>
+
+</md-content>
+
+
+<md-content layout-padding>
+
+    <table class="md-table">
+
+        <thead>
+        <tr class="md-table-headers-row">
+            <th  class="md-table-header">Time</th>
+            <th  class="md-table-header ">Result</th>
+            <th class="md-table-header ">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr ng-repeat="resp in data track by $index">
+
+
+            <td class="md-table-cell">
+                {{ resp.timestamp| amUtc | amLocal | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}
+            </td>
+
+            <td class="md-table-cell">
+                {{resp.result.RESULT}}
+            </td>
+
+            <td class="md-table-cell">
+
+                <div ng-if="true == resp.anomaly">
+                    <md-icon md-svg-src="scripts/images/clear.svg" aria-label="android "></md-icon>
+                </div>
+                <div ng-if="true != resp.anomaly">
+                    <md-icon md-svg-src="scripts/images/done.svg" aria-label="android "></md-icon>                </div>
+
+            </td>
+
+        </tr>
+
+        </tbody>
+
+        </table>
+
+</md-content>
+

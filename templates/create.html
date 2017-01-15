@@ -1,0 +1,141 @@
+
+    <md-content  layout-padding layout-margin >
+
+            <form name="myForm" class="styleForm" ng-submit="submitForm()"   novalidate>
+
+                <md-input-container class="md-block">
+                    <input type="text"  name="alert" ng-model="alertName" placeholder="Alert Name" required >
+                </md-input-container>
+
+                <span style="color:red" class="warningStyle" ng-show="myForm.$submitted && myForm.alert.$error.required">
+          *Alert name is required.
+          </span>
+                <div>
+                <md-select name="source" class="dropDownMenu" ng-model="dataSource" placeholder="Data Source"  required >
+                    <md-option ng-value="dataSource.name" ng-repeat="dataSource in dataSources">{{dataSource.name}}</md-option>
+                </md-select>
+                <span style="color:red" class="warningStyle" ng-show="myForm.$submitted && myForm.source.$error.required">
+          *Data source is required.
+          </span>
+
+                <md-select name="subSource" class="dropDownMenu" ng-model="subDataSource" placeholder="Sub Data Source" ng-show='dataSource == "Druid"'  ng-required='dataSource == "Druid"'>
+                    <md-option ng-value="subDataSource.name" ng-repeat="subDataSource in subdataSources">{{subDataSource.name}}</md-option>
+                </md-select>
+                <span style="color:red"  class="warningStyle" ng-show="myForm.$submitted && myForm.subSource.$error.required">
+          *Sub data source is required.
+          </span>
+                </div>
+
+                <md-select  name="selMetric" class="dropDownMenu" ng-model="metric" placeholder="Metrics"  ng-show='subDataSource == "ONO Data Cube"' ng-required='subDataSource == "ONO Data Cube"'>
+                    <md-option ng-value="metric.name" ng-repeat="metric in metrics">{{metric.name}}</md-option>
+                </md-select>
+                <span style="color:red" class="warningStyle"  ng-show="myForm.$submitted && myForm.selMetric.$error.required">
+         *Metric is required.
+          </span>
+
+           <span ng-repeat="allCheckBoxesData in allCheckBoxes"   class="md-primary"  >
+
+           <div layout="row" layout-align="start center">
+
+               <div flex="15">
+                    <md-checkbox     ng-model='checkStatus' aria-lable="allCheckBoxesData.name" ng-change="checkedOrNot(checkStatus)" >
+              {{allCheckBoxesData.name}}
+            </md-checkbox>
+               </div>
+
+               <div flex="85">
+                 <md-input-container class="md-block">
+
+            <input type="text" ng-model="allCheckBoxesData.model" ng-disabled='!checkStatus' >
+                </md-input-container>
+               </div>
+
+            </div>
+
+           </span>
+
+                <md-select name="selAggregation"  class="dropDownMenu"  ng-model="aggregation" placeholder="Aggregation"  required>
+                    <md-option  ng-repeat="aggre in aggregations">{{aggre.name}}</md-option>
+                </md-select>
+                <span style="color:red" class="warningStyle" ng-show="myForm.$submitted && myForm.selAggregation.$error.required">
+          *Aggregation is required.
+          </span>
+
+                <md-select name="selInterval"  class="dropDownMenu" ng-model="interval" placeholder="Intervals"  required>
+                    <md-option ng-value="interval.name" ng-repeat="interval in intervals">{{interval.name}}</md-option>
+                </md-select>
+                <span style="color:red" class="warningStyle" ng-show="myForm.$submitted && myForm.selInterval.$error.required">
+          *Interval is required.
+          </span>
+
+
+                <md-select name="selModel" class="dropDownMenu" ng-model="model" placeholder="Models"  required>
+                    <md-option ng-value="model.name" ng-repeat="model in models">{{model.name}}</md-option>
+                </md-select>
+                <span style="color:red" class="warningStyle"  ng-show="myForm.$submitted && myForm.selModel.$error.required">
+          *Model is required
+          </span>
+
+                <br>
+                <!--  <label ng-show='model == "basic"'>Enter Threshold</label> -->
+
+                <ng-include src="model"></ng-include>
+
+
+                <script type="text/ng-template" id="basic">
+                    <md-input-container class="md-block">
+                        <input type="text"  name="threshold" placeholder="Threshold" ng-model="thresholdValue" required >
+                    </md-input-container>
+
+                    <span style="color:red" class="warningStyle"  ng-show="myForm.$submitted && myForm.threshold.$error.required">
+          *Threshold is required
+          </span>
+                </script>
+
+                <br>
+
+                <!--   <input type="radio" ng-model="checkTime" value="h" ng-click="timeCheckedOrNot(checkTime)"/>hour
+                  <input type="radio" ng-model="checkTime" value="d" ng-click="timeCheckedOrNot(checkTime)"/>day
+                  <input type="radio" ng-model="checkTime" value="w" ng-click="timeCheckedOrNot(checkTime)"/>week
+                  <input type="radio" ng-model="checkTime" value="m" ng-click="timeCheckedOrNot(checkTime)"/>month
+                  <br>
+                  <md-input-container>
+                          <label>Enter time</label>
+                          <input type="text" name="selTime" ng-model="alertTime" ng-disabled='!checkTime' required >
+                          </md-input-container>
+                          <span style="color:red" ng-show="myForm.$submitted && myForm.selTime.$error.required">
+                          Select required time.
+                          </span>
+
+                  <br> -->
+
+                <md-input-container class="md-block">
+                    <input type="text" name="setCron" ng-model="cron"  Placeholder="Set cron" required>
+                </md-input-container>
+                <span style="color:red" class="warningStyle"  ng-show="myForm.$submitted && myForm.setCron.$error.required">
+          *Cron value is required.
+          </span>
+                <br>
+
+                <md-input-container class="md-input-has-placeholder">
+                    <label>Expire Date</label>
+                    <input mdc-datetime-picker="" date="true" time="true" type="text"
+                            max-date="dateTimeEnd" ng-model="dateTimeStart" class=" md-input"
+                           id="input_0">
+                </md-input-container>
+
+                <br>
+
+
+                <md-input-container class="md-block">
+                    <input type="text" name="emails" ng-model="emails"  Placeholder="Emails" required>
+                </md-input-container>
+                <span style="color:red" class="warningStyle"  ng-show="myForm.$submitted && myForm.emails.$error.required">
+          *Email or Emails are required
+          </span>
+
+                <md-button  type="submit" class="md-accent md-raised">SUBMIT</md-button>
+
+            </form>
+    </md-content>
+

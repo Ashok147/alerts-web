@@ -1,0 +1,97 @@
+<md-content>
+
+    <div layout="row" layout-wrap>
+
+        <form name="listAlertsForm" class="styleForm" ng-submit="submitForAlerts()"   validate>
+            <md-datepicker name="fromTime" ng-model="listQueryForm.fromTimee" md-placeholder="From Date" required></md-datepicker>
+            <span style="color:red" class="warningStyle" ng-show="listAlertsForm.$submitted && listAlertsForm.fromTime.$error.required">
+          *From Date is Required.
+          </span>
+
+            <md-datepicker ng-model="listQueryForm.toTimee" md-min-date="listQueryForm.fromTimee" md-placeholder="To Date" ></md-datepicker>
+
+            <md-button  type="submit" class="md-accent md-raised">SUBMIT</md-button>
+
+        </form>
+    </div>
+
+</md-content>
+
+
+<md-content layout-padding>
+
+    <table class="md-table">
+
+        <thead>
+        <tr class="md-table-headers-row">
+            <th  class="md-table-header">Name</th>
+            <th  class="md-table-header ">DataSource</th>
+            <th class="md-table-header ">Metric</th>
+            <th  class="md-table-header ">State</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr ng-repeat = "alert in alertsCollection">
+
+            <td class="md-table-cell">
+                {{ alert.name }}
+            </td>
+
+            <td class="md-table-cell">
+                {{ alert.dataSource }}
+            </td>
+
+            <td class="md-table-cell">
+                {{ alert.metric }}
+            </td>
+
+            <td class="md-table-cell">
+
+                <div layout="row"  layout-align="center center">
+                    <button ng-init="alertState = alert.state" ng-model="alertState" ng-click="performAction(alert)">
+                        <md-icon ng-init="imagePath = getImagePathOfAlertState(alert.state);" md-svg-src="{{ imagePath }}" aria-label="android "></md-icon>
+                    </button>
+
+                    <button  ng-click="editAlert(alert)">
+                        <md-icon md-svg-src="scripts/images/edit.svg" aria-label="android "></md-icon>
+                    </button>
+
+                    <button  ng-click="deleteAlert(alert)">
+                        <md-icon md-svg-src="scripts/images/delete.svg" aria-label="android "></md-icon>
+                    </button>
+
+                </div>
+
+
+            </td>
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</md-content>
+
+<div layout="row" layout-margin layout-align="end end">
+
+    <md-select placeholder="Pick"  ng-model="selectedSize" ng-disabled="selected === 0" ng-change="selectedItemChanged()">
+        <md-option value="10">10</md-option>
+        <md-option value="15">15</md-option>
+        <md-option value="20">20</md-option>
+        <md-option value="25">25</md-option>
+    </md-select>
+
+    <button class="md-button" type="button" ng-disabled="hasPrev === 0"  aria-label="Previous page" ng-click="previousPage()">
+        Prev
+    </button>
+
+    <button class="md-button" type="button" ng-disabled="hasNext === 0"  aria-label="Next page" ng-click="nextPage()">
+        Next
+    </button>
+</div>
+
+<!--
+
+--!>

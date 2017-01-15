@@ -1,0 +1,51 @@
+<md-content>
+
+    <div layout="row" layout-wrap>
+
+        <form name="listAlertsForm" class="styleForm" ng-submit="submitForAlerts()"   novalidate>
+            <md-datepicker name="fromTime" ng-model="listQueryForm.fromTimee" md-placeholder="From Date" required></md-datepicker>
+            <span style="color:red" class="warningStyle" ng-show="listAlertsForm.$submitted && listAlertsForm.fromTime.$error.required">
+          *From Date is Required.
+          </span>
+
+            <md-datepicker ng-model="listQueryForm.toTimee" md-placeholder="To Date" ></md-datepicker>
+
+            <md-button  type="submit" class="md-accent md-raised">SUBMIT</md-button>
+
+        </form>
+    </div>
+
+</md-content>
+
+<md-content layout-padding>
+
+    <mdt-table
+            table-card="{title: 'Alerts'}"
+            paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,50]}"
+            mdt-row-paginator="paginatorCallback(page, pageSize)"
+            mdt-row-paginator-error-message="Error happened during loading alerts."
+            mdt-row="{
+            'table-row-id-key': 'id',
+            'column-keys': [
+                'name',
+                'dataSource',
+                'dataSubSource',
+                'metric',
+                'state'
+            ],
+        }">
+        <mdt-header-row>
+            <mdt-column align-rule="left">Name</mdt-column>
+            <mdt-column align-rule="left">DataSource</mdt-column>
+            <mdt-column align-rule="left">DataSubSource</mdt-column>
+            <mdt-column align-rule="left">Metric</mdt-column>
+            <mdt-column align-rule="left">State</mdt-column>
+        </mdt-header-row>
+    </mdt-table>
+
+
+</md-content>
+
+
+
+
