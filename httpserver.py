@@ -9,8 +9,7 @@ Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
 class ThreadedHTTPServer(ThreadingMixIn, SimpleHTTPServer):
     """Handle requests in a separate thread."""
 
-httpd = SocketServer.TCPServer(("", PORT), Handler)
-
-print("serving at port", PORT)
-httpd.serve_forever()
-
+if __name__ == '__main__':
+    server = ThreadedHTTPServer(('localhost', 8000), Handler)
+    print 'Starting server, use <Ctrl-C> to stop'
+    server.serve_forever()
